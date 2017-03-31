@@ -1,0 +1,73 @@
+﻿@model IEnumerable<LexiconLMS.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Elever";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<div>
+    @using (Html.BeginForm("Index", "ManageStudents", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="breadcrumb">
+                    <br />
+                    @Html.TextBox("SearchString")
+                    <input type="submit" value="Sök" />
+                </p>
+            </div>
+        </div>
+    }
+</div>
+ @foreach (var item in Model)
+    {
+
+<div class="row">
+    <div class="col-lg-4">
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#@item.Id" aria-expanded="false" aria-controls="@item.Id">
+                        @item.Fullname
+
+                    </a>
+                </h4>
+            </div>
+            <div id="@item.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading">
+                <div>
+                    @Html.DisplayNameFor(model => model.FirstName):
+
+                    <b>@Html.DisplayFor(modelItem => item.FirstName)</b>
+                </div>
+                <div>
+                    @Html.DisplayNameFor(model => model.LastName):
+                    <b> @Html.DisplayFor(modelItem => item.LastName)</b>
+                </div>
+                <div>
+                    @Html.DisplayNameFor(model => model.Email):
+                    @Html.DisplayFor(modelItem => item.Email)
+                </div>
+                <div>
+                    @Html.DisplayNameFor(model => model.PhoneNumber):
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </div>
+                <div>
+                    @Html.DisplayNameFor(model => model.Course.Name):
+                    <b> @Html.DisplayFor(modelItem => item.Course.Name)</b>
+                </div>
+                @Html.ActionLink("Ändra", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Ta bort", "Delete", new { id = item.Id })
+            </div>
+        </div>
+    </div>
+</div>
+    
+            
+}
+
+
